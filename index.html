@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>💎 Кодекс чата — Правила сообщества</title>
+  <style>
+    :root {
+      --bg: #070911;
+      --bg-elevated: rgba(15, 20, 34, 0.78);
+      --bg-card: rgba(18, 24, 41, 0.72);
+      --bg-card-hover: rgba(24, 32, 54, 0.9);
+      --bg-sub: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.09);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --text: #f3f6ff;
+      --text-secondary: #a4b0cc;
+      --text-muted: #6c7897;
+
+      --accent-cyan: #38bdf8;
+      --accent-violet: #a855f7;
+      --accent-pink: #ec4899;
+
+      --light-color: #22d3ee;
+      --light-bg: rgba(34, 211, 238, 0.12);
+      --light-border: rgba(34, 211, 238, 0.28);
+
+      --med-color: #fbbf24;
+      --med-bg: rgba(251, 191, 36, 0.12);
+      --med-border: rgba(251, 191, 36, 0.28);
+
+      --heavy-color: #fb7185;
+      --heavy-bg: rgba(251, 113, 133, 0.13);
+      --heavy-border: rgba(251, 113, 133, 0.3);
+
+      --info-color: #c084fc;
+      --info-bg: rgba(192, 132, 252, 0.12);
+      --info-border: rgba(192, 132, 252, 0.28);
+
+      --shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+    }
+
+    [data-theme="light"] {
+      --bg: #f1f5fb;
+      --bg-elevated: rgba(255, 255, 255, 0.88);
+      --bg-card: rgba(255, 255, 255, 0.92);
+      --bg-card-hover: #ffffff;
+      --bg-sub: rgba(15, 23, 42, 0.04);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.15);
+      --text: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+
+      --light-color: #0284c7;
+      --light-bg: rgba(2, 132, 199, 0.1);
+      --light-border: rgba(2, 132, 199, 0.24);
+
+      --med-color: #d97706;
+      --med-bg: rgba(217, 119, 6, 0.1);
+      --med-border: rgba(217, 119, 6, 0.24);
+
+      --heavy-color: #e11d48;
+      --heavy-bg: rgba(225, 29, 72, 0.1);
+      --heavy-border: rgba(225, 29, 72, 0.24);
+
+      --info-color: #7e22ce;
+      --info-bg: rgba(126, 34, 206, 0.09);
+      --info-border: rgba(126, 34, 206, 0.22);
+
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      padding-bottom: 64px;
+    }
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.26;
+      animation: float 16s ease-in-out infinite alternate;
+    }
+
+    [data-theme="light"] .orb {
+      opacity: 0.16;
+    }
+
+    .orb-1 {
+      width: 340px;
+      height: 340px;
+      background: #38bdf8;
+      top: -110px;
+      left: -90px;
+    }
+
+    .orb-2 {
+      width: 380px;
+      height: 380px;
+      background: #a855f7;
+      top: 22%;
+      right: -130px;
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      width: 300px;
+      height: 300px;
+      background: #ec4899;
+      bottom: -80px;
+      left: 10%;
+      animation-delay: -10s;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(28px, -24px) scale(1.1); }
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at 50% 0%, black 25%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 0%, black 25%, transparent 80%);
+      opacity: 0.45;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet), var(--accent-pink));
+      z-index: 200;
+      transition: width 0.08s linear;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-elevated);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand-gem {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(168, 85, 247, 0.25));
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--bg-sub);
+      color: var(--text);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .icon-btn:active {
+      transform: scale(0.92);
+    }
+
+    .icon-btn:hover {
+      border-color: var(--border-strong);
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 18px 14px 0;
+    }
+
+    .hero-frame {
+      position: relative;
+      padding: 1.5px;
+      border-radius: 24px;
+      background: linear-gradient(125deg, rgba(56, 189, 248, 0.65), rgba(168, 85, 247, 0.5), rgba(236, 72, 153, 0.55));
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .hero-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-radius: 22.5px;
+      padding: 22px 18px 20px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 5px 11px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 10px #34d399;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 6vw, 38px);
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+    }
+
+    .hero-title .grad {
+      background: linear-gradient(95deg, #38bdf8 0%, #c084fc 52%, #f472b6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .hero-warn {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      background: rgba(251, 191, 36, 0.09);
+      border: 1px solid rgba(251, 191, 36, 0.24);
+      border-radius: 13px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .hero-warn strong {
+      color: var(--med-color);
+    }
+
+    .search-wrap {
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-sub);
+      border: 1px solid var(--border-strong);
+      border-radius: 14px;
+      padding: 13px 40px 13px 42px;
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.16);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      pointer-events: none;
+      opacity: 0.75;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: none;
+      background: var(--border);
+      color: var(--text);
+      font-size: 14px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-clear.visible {
+      display: flex;
+    }
+
+    .chips-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 2px 14px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .chips-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chip .count {
+      font-size: 11px;
+      padding: 1px 7px;
+      border-radius: 999px;
+      background: var(--bg-sub);
+      color: var(--text-muted);
+    }
+
+    .chip.active {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, #0284c7, #7c3aed);
+      box-shadow: 0 6px 18px rgba(56, 189, 248, 0.28);
+    }
+
+    .chip.active .count {
+      background: rgba(255, 255, 255, 0.22);
+      color: #fff;
+    }
+
+    .chip[data-filter="light"].active {
+      background: linear-gradient(135deg, #0891b2, #2563eb);
+    }
+    .chip[data-filter="medium"].active {
+      background: linear-gradient(135deg, #d97706, #ea580c);
+    }
+    .chip[data-filter="heavy"].active {
+      background: linear-gradient(135deg, #e11d48, #be185d);
+    }
+    .chip[data-filter="info"].active {
+      background: linear-gradient(135deg, #7e22ce, #a21caf);
+    }
+
+    .section-block {
+      margin-bottom: 24px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 6px 4px 12px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+    }
+
+    .sec-light .section-badge { background: var(--light-bg); border: 1px solid var(--light-border); }
+    .sec-medium .section-badge { background: var(--med-bg); border: 1px solid var(--med-border); }
+    .sec-heavy .section-badge { background: var(--heavy-bg); border: 1px solid var(--heavy-border); }
+    .sec-info .section-badge { background: var(--info-bg); border: 1px solid var(--info-border); }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .section-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 680px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .rule-card.wide {
+        grid-column: span 2;
+      }
+    }
+
+    .rule-card {
+      position: relative;
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .rule-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      border-radius: 0 0 4px 4px;
+      opacity: 0.9;
+    }
+
+    .rule-card.cat-light::before { background: linear-gradient(90deg, transparent, var(--light-color), transparent); }
+    .rule-card.cat-medium::before { background: linear-gradient(90deg, transparent, var(--med-color), transparent); }
+    .rule-card.cat-heavy::before { background: linear-gradient(90deg, transparent, var(--heavy-color), transparent); }
+
+    .rule-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .rule-num {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 8px;
+      letter-spacing: 0.03em;
+    }
+
+    .cat-light .rule-num { background: var(--light-bg); color: var(--light-color); border: 1px solid var(--light-border); }
+    .cat-medium .rule-num { background: var(--med-bg); color: var(--med-color); border: 1px solid var(--med-border); }
+    .cat-heavy .rule-num { background: var(--heavy-bg); color: var(--heavy-color); border: 1px solid var(--heavy-border); }
+
+    .new-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(168, 85, 247, 0.16);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .copy-btn {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--bg-sub);
+      color: var(--text-secondary);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .copy-btn:active {
+      transform: scale(0.88);
+    }
+
+    .copy-btn:hover {
+      border-color: var(--accent-cyan);
+      color: var(--text);
+    }
+
+    .rule-title {
+      font-size: 16.5px;
+      font-weight: 800;
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .punishment-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 10px;
+    }
+
+    .cat-light .punishment-pill { background: var(--light-bg); color: var(--light-color); }
+    .cat-medium .punishment-pill { background: var(--med-bg); color: var(--med-color); }
+    .cat-heavy .punishment-pill { background: var(--heavy-bg); color: var(--heavy-color); }
+
+    .rule-desc {
+      font-size: 13.8px;
+      color: var(--text-secondary);
+    }
+
+    .rule-note {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      padding-top: 9px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .sub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 2px;
+    }
+
+    .sub-item {
+      background: var(--bg-sub);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 9px 11px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .sub-item-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sub-code {
+      font-weight: 800;
+      color: var(--text);
+      font-size: 12.5px;
+    }
+
+    .sub-punish {
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .cat-light .sub-punish { color: var(--light-color); }
+    .cat-medium .sub-punish { color: var(--med-color); }
+
+    .accordion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .acc-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .acc-trigger {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      padding: 15px 16px;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .acc-arrow {
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+    }
+
+    .acc-item.open .acc-arrow {
+      transform: rotate(180deg);
+    }
+
+    .acc-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.28s ease;
+    }
+
+    .acc-content {
+      padding: 0 16px 15px;
+      font-size: 13.8px;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+
+    .empty-state {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--bg-card);
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      margin-top: 12px;
+    }
+
+    .empty-state.visible {
+      display: block;
+    }
+
+    .empty-emoji {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .empty-title {
+      font-weight: 800;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .empty-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(90px);
+      background: #101626;
+      color: #fff;
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      padding: 11px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      z-index: 300;
+      opacity: 0;
+      transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+      white-space: nowrap;
+      max-width: 92vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      padding: 0 16px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <div class="ambient">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="grid-overlay"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-gem">💎</div>
+        <span>Кодекс чата</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" id="focusSearchBtn" title="Поиск по правилам" aria-label="Поиск">🔍</button>
+        <button class="icon-btn" id="themeToggle" title="Переключить тему" aria-label="Сменить тему">☀️</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-frame">
+      <div class="hero-card">
+        <div class="status-pill">
+          <span class="pulse-dot"></span>
+          Актуальный регламент
+        </div>
+        <h1 class="hero-title">Добро пожаловать в <span class="grad">наш чат</span></h1>
+        <p class="hero-desc">
+          Прежде чем писать в группу, ознакомьтесь с правилами. Они разделены на три уровня тяжести, чтобы каждому было понятно, что разрешено, а за что выдаётся наказание.
+        </p>
+        <div class="hero-warn">
+          <span>⚠️</span>
+          <div><strong>Важно:</strong> незнание правил не освобождает вас от ответственности.</div>
+        </div>
+
+        <div class="search-wrap">
+          <span class="search-icon">🔎</span>
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Найти правило: спам, реклама, 2.6, рейд..."
+            autocomplete="off"
+          />
+          <button class="search-clear" id="clearSearch" aria-label="Очистить поиск">✕</button>
+        </div>
+      </div>
+    </section>
+
+    <nav class="chips-bar" id="chipsBar" aria-label="Категории правил">
+      <button class="chip active" data-filter="all">Все <span class="count">21</span></button>
+      <button class="chip" data-filter="light">🔇 Лёгкие <span class="count">5</span></button>
+      <button class="chip" data-filter="medium">❗️ Средние <span class="count">7</span></button>
+      <button class="chip" data-filter="heavy">🚫 Тяжёлые <span class="count">9</span></button>
+      <button class="chip" data-filter="info">⚖️ Важно знать <span class="count">3</span></button>
+    </nav>
+
+    <section class="section-block sec-light" data-section="light">
+      <div class="section-head">
+        <div class="section-title-wrap">
+          <div class="section-badge">🔇</div>
+          <div>
+            <h2 class="section-title">1. Лёгкие наказания</h2>
+            <div class="section-sub">Небольшие нарушения порядка — временный мут</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <article class="rule-card cat-light" data-cat="light" data-copy="⚠️ Нарушение п. 1.1 (Спам, флуд) — Мут 15 минут (повторно: 30 мин / 1 час)">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 1.1</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">💬 Спам и флуд</h3>
+          <div class="punishment-pill">⏳ Мут 15 минут</div>
+          <p class="rule-desc">Отправка 5 и более однотипных или бессмысленных сообщений подряд (стикеры, медиа, текст).</p>
+          <div class="rule-note">🔄 При повторном нарушении — 30 мин, далее 1 час.</div>
+        </article>
+
+        <article class="rule-card cat-light" data-cat="light" data-copy="⚠️ Нарушение п. 1.2 (Оскорбления без причины) — Мут 30 минут">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 1.2</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">🤬 Оскорбления без причины</h3>
+          <div class="punishment-pill">⏳ Мут 30 минут</div>
+          <p class="rule-desc">Необоснованные оскорбления участников чата и грубый переход на личности.</p>
+        </article>
+
+        <article class="rule-card cat-light wide" data-cat="light" data-copy="⚠️ Нарушение п. 1.3 (Оффтоп) — Мут 15 мин (обычные темы) / 30 мин (строгие темы)">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 1.3</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">📌 Оффтоп (сообщения не по теме)</h3>
+          <div class="sub-list">
+            <div class="sub-item">
+              <div class="sub-item-head">
+                <span class="sub-code">п. 1.3.1 — Обычные темы</span>
+                <span class="sub-punish">Мут 15 минут</span>
+              </div>
+              <span>Общение не по назначению выбранного раздела.</span>
+            </div>
+            <div class="sub-item">
+              <div class="sub-item-head">
+                <span class="sub-code">п. 1.3.2 — Строгие темы</span>
+                <span class="sub-punish">Мут 30 минут</span>
+              </div>
+              <span>Оффтоп в темах со строгим запретом (Обратная связь, закрытые темы).</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="rule-card cat-light" data-cat="light" data-copy="⚠️ Нарушение п. 1.4 (Порнография, треш-контент) — Мут 2–3 часа">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 1.4</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">🫦 Порнография и треш-контент</h3>
+          <div class="punishment-pill">⏳ Мут 2–3 часа</div>
+          <p class="rule-desc">Публикация шок-контента, эротических, порнографических и треш-материалов в чате.</p>
+        </article>
+
+        <article class="rule-card cat-light" data-cat="light" data-copy="⚠️ Нарушение п. 1.5 (Лестница и капс) — Мут 15–30 минут">
+          <div class="card-top">
+            <div class="card-meta">
+              <span class="rule-num">п. 1.5</span>
+              <span class="new-tag">Доп</span>
+            </div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">🪜 Лестница и злоупотребление капсом</h3>
+          <div class="punishment-pill">⏳ Мут 15–30 минут</div>
+          <p class="rule-desc">Дробление одной короткой мысли на 5+ отдельных сообщений подряд или постоянное написание сообщений ЗАГЛАВНЫМИ буквами.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block sec-medium" data-section="medium">
+      <div class="section-head">
+        <div class="section-title-wrap">
+          <div class="section-badge">❗️</div>
+          <div>
+            <h2 class="section-title">2. Средние наказания</h2>
+            <div class="section-sub">Серьёзные нарушения — длительный мут + предупреждение (варн)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <article class="rule-card cat-medium" data-cat="medium" data-copy="⚠️ Нарушение п. 2.1 (Буллинг и токсичность) — Мут 1–2 часа + варн">
+          <div class="card-top">
+            <div class="card-meta">
+              <span class="rule-num">п. 2.1</span>
+              <span class="new-tag">Доп</span>
+            </div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">☣️ Буллинг и токсичность</h3>
+          <div class="punishment-pill">⚠️ Мут 1–2 часа + варн</div>
+          <p class="rule-desc">Систематическая травля, регулярные насмешки, пассивная агрессия и намеренная порча атмосферы в чате.</p>
+        </article>
+
+        <article class="rule-card cat-medium" data-cat="medium" data-copy="⚠️ Нарушение п. 2.2 (Копирование чужой анкеты) — Мут 3 часа + варн">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 2.2</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">📄 Копирование чужой анкеты</h3>
+          <div class="punishment-pill">⚠️ Мут 3 часа + варн</div>
+          <p class="rule-desc">Полное или частичное воровство оформления и текста анкеты другого участника.</p>
+        </article>
+
+        <article class="rule-card cat-medium" data-cat="medium" data-copy="⚠️ Нарушение п. 2.3 (Проверка анкет без полномочий) — Мут 2 часа + варн">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 2.3</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">🪪 Самовольная проверка анкет</h3>
+          <div class="punishment-pill">⚠️ Мут 2 часа + варн</div>
+          <p class="rule-desc">Проверка и одобрение чужих анкет участником, не имеющим соответствующих полномочий.</p>
+        </article>
+
+        <article class="rule-card cat-medium" data-cat="medium" data-copy="⚠️ Нарушение п. 2.4 (Реклама) — Удаление + мут 1 час + варн (повторно: бан)">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 2.4</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">📢 Реклама в любом виде</h3>
+          <div class="punishment-pill">⚠️ Удаление + мут 1 час + варн</div>
+          <p class="rule-desc">Любая несогласованная реклама чатов, каналов, ботов, услуг или сторонних ресурсов.</p>
+          <div class="rule-note">🔄 При повторном нарушении — бан.</div>
+        </article>
+
+        <article class="rule-card cat-medium" data-cat="medium" data-copy="⚠️ Нарушение п. 2.5 (Оскорбление религии) — Мут 1 час + варн">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 2.5</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">🕊️ Оскорбление религии</h3>
+          <div class="punishment-pill">⚠️ Мут 1 час + варн</div>
+          <p class="rule-desc">Запрещены оскорбления любых религий, вероисповеданий и чувств верующих в любой форме.</p>
+        </article>
+
+        <article class="rule-card cat-medium" data-cat="medium" data-copy="⚠️ Нарушение п. 2.6 (Провокации) — Мут 3 часа + варн">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 2.6</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">🔥 Провокации</h3>
+          <div class="punishment-pill">⚠️ Мут 3 часа + варн</div>
+          <p class="rule-desc">Запрещено намеренно вызывать человека на эмоции и конфликт, даже без использования прямых оскорблений.</p>
+        </article>
+
+        <article class="rule-card cat-medium wide" data-cat="medium" data-copy="⚠️ Нарушение п. 2.7 (Злоупотребление полномочиями) — Варн / снятие с должности">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 2.7</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">⚖️ Злоупотребление полномочиями</h3>
+          <div class="sub-list">
+            <div class="sub-item">
+              <div class="sub-item-head">
+                <span class="sub-code">п. 2.7.1 — Со стороны вице</span>
+                <span class="sub-punish">Варн → повторно: снятие</span>
+              </div>
+            </div>
+            <div class="sub-item">
+              <div class="sub-item-head">
+                <span class="sub-code">п. 2.7.2 — Со стороны модератора</span>
+                <span class="sub-punish">Варн или временное снятие</span>
+              </div>
+            </div>
+            <div class="sub-item">
+              <div class="sub-item-head">
+                <span class="sub-code">п. 2.7.3 — Со стороны администратора</span>
+                <span class="sub-punish">На усмотрение владельца</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block sec-heavy" data-section="heavy">
+      <div class="section-head">
+        <div class="section-title-wrap">
+          <div class="section-badge">🚫</div>
+          <div>
+            <h2 class="section-title">3. Тяжёлые наказания</h2>
+            <div class="section-sub">Критические нарушения — длительный или перманентный бан</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <article class="rule-card cat-heavy" data-cat="heavy" data-copy="🚫 Нарушение п. 3.1 (Рейд) — Бан навсегда">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 3.1</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">⚔️ Рейд</h3>
+          <div class="punishment-pill">🚫 Бан навсегда</div>
+          <p class="rule-desc">Организация или участие в массовой атаке на чат с целью помешать общению.</p>
+        </article>
+
+        <article class="rule-card cat-heavy" data-cat="heavy" data-copy="🚫 Нарушение п. 3.2 (Попытка сноса чата) — Бан навсегда">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 3.2</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">💣 Попытка сноса чата</h3>
+          <div class="punishment-pill">🚫 Бан навсегда</div>
+          <p class="rule-desc">Любые действия, угрозы или попытки заблокировать, удалить или уничтожить группу.</p>
+        </article>
+
+        <article class="rule-card cat-heavy" data-cat="heavy" data-copy="🚫 Нарушение п. 3.3 (Оскорбление родни владельца) — Бан навсегда">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 3.3</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">👑 Оскорбление родни владельца</h3>
+          <div class="punishment-pill">🚫 Бан навсегда</div>
+          <p class="rule-desc">Любые оскорбления или упоминания в негативном ключе родственников владельца чата.</p>
+        </article>
+
+        <article class="rule-card cat-heavy" data-cat="heavy" data-copy="🚫 Нарушение п. 3.4 (Выдача себя за админа) — Бан на 7 дней">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 3.4</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">🎭 Выдача себя за админа</h3>
+          <div class="punishment-pill">⛔ Бан на 7 дней</div>
+          <p class="rule-desc">Попытка представиться администратором, модератором или владельцем чата, не являясь им.</p>
+        </article>
+
+        <article class="rule-card cat-heavy" data-cat="heavy" data-copy="🚫 Нарушение п. 3.5 (Дискриминация по половому/расовому признаку) — Варн (повторно: бан 14 дней)">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 3.5</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">🌍 Дискриминация</h3>
+          <div class="punishment-pill">⚠️ Варн → повторно: бан 14 дней</div>
+          <p class="rule-desc">Унижение и дискриминация участников по половому или расовому признаку.</p>
+        </article>
+
+        <article class="rule-card cat-heavy" data-cat="heavy" data-copy="🚫 Нарушение п. 3.6 (Слив, докс, сват) — Бан навсегда">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 3.6</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">🕵️ Слив, докс, сват и т.п.</h3>
+          <div class="punishment-pill">🚫 Бан навсегда</div>
+          <p class="rule-desc">Публикация, поиск или угрозы распространения личных данных участников (ФИО, фото, номера, адреса).</p>
+        </article>
+
+        <article class="rule-card cat-heavy" data-cat="heavy" data-copy="🚫 Нарушение п. 3.7 (Накрутка ботов/индусов без согласия владельца) — Бан навсегда">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 3.7</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">🤖 Накрутка ботов / индусов</h3>
+          <div class="punishment-pill">🚫 Бан навсегда</div>
+          <p class="rule-desc">Любая накрутка ботов или фейковых аккаунтов без ведома и согласия владельца чата.</p>
+        </article>
+
+        <article class="rule-card cat-heavy" data-cat="heavy" data-copy="🚫 Нарушение п. 3.8 (Краш-стикеры) — Бан навсегда">
+          <div class="card-top">
+            <div class="card-meta"><span class="rule-num">п. 3.8</span></div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">💥 Краш-стикеры</h3>
+          <div class="punishment-pill">🚫 Бан навсегда</div>
+          <p class="rule-desc">Отправка стикеров, гифок или файлов, вызывающих зависание или вылет Telegram у участников.</p>
+        </article>
+
+        <article class="rule-card cat-heavy" data-cat="heavy" data-copy="🚫 Нарушение п. 3.9 (Обход наказания) — Бан обоих аккаунтов навсегда">
+          <div class="card-top">
+            <div class="card-meta">
+              <span class="rule-num">п. 3.9</span>
+              <span class="new-tag">Доп</span>
+            </div>
+            <button class="copy-btn" title="Скопировать пункт">📋</button>
+          </div>
+          <h3 class="rule-title">🔗 Обход наказания</h3>
+          <div class="punishment-pill">🚫 Бан обоих аккаунтов навсегда</div>
+          <p class="rule-desc">Заход в чат со второго аккаунта (твинка) во время активного мута или после получения бана.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block sec-info" data-section="info">
+      <div class="section-head">
+        <div class="section-title-wrap">
+          <div class="section-badge">⚖️</div>
+          <div>
+            <h2 class="section-title">Важно знать</h2>
+            <div class="section-sub">Как работают варны, сложение сроков и обжалование</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-list">
+        <div class="acc-item open" data-cat="info">
+          <button class="acc-trigger">
+            <span>📌 Система варнов (предупреждений)</span>
+            <span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-content">
+              Варн — официальное предупреждение за серьёзные нарушения. Накопление <strong>3 активных варнов</strong> автоматически приводит к блокировке (бану) в чате.
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item" data-cat="info">
+          <button class="acc-trigger">
+            <span>➕ Комбинация нарушений</span>
+            <span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-content">
+              Если участник нарушил сразу несколько пунктов (например, флуд + оскорбления + оффтоп), модератор имеет право просуммировать сроки мута или выбрать более строгое наказание.
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item" data-cat="info">
+          <button class="acc-trigger">
+            <span>📩 Как обжаловать наказание</span>
+            <span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-content">
+              Если вы считаете, что мут или варн выдали ошибочно, спокойно напишите в раздел <strong>Обратная связь</strong> или старшей администрации. Агрессия, спам и попытки обхода наказания с твинков лишают права на обжалование.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="empty-state" id="emptyState">
+      <div class="empty-emoji">🔍</div>
+      <div class="empty-title">Ничего не найдено</div>
+      <div class="empty-sub">Попробуйте другой запрос, например «мут», «анкета» или «2.6»</div>
+    </div>
+
+    <footer class="footer">
+      💎 Уважайте друг друга — и общаться в чате будет приятно всем.<br />
+      Нажмите 📋 на любой карточке, чтобы скопировать пункт для модерации.
+    </footer>
+  </main>
+
+  <div class="toast" id="toast">Скопировано в буфер обмена</div>
+
+  <script>
+    const htmlEl = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('chat_rules_theme');
+    if (savedTheme) {
+      htmlEl.setAttribute('data-theme', savedTheme);
+      themeToggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const next = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', next);
+      localStorage.setItem('chat_rules_theme', next);
+      themeToggle.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+      progressBar.style.width = pct + '%';
+    }, { passive: true });
+
+    const accItems = document.querySelectorAll('.acc-item');
+    function syncAccordion(item) {
+      const body = item.querySelector('.acc-body');
+      body.style.maxHeight = item.classList.contains('open') ? body.scrollHeight + 'px' : '0px';
+    }
+    accItems.forEach(item => {
+      syncAccordion(item);
+      item.querySelector('.acc-trigger').addEventListener('click', () => {
+        item.classList.toggle('open');
+        syncAccordion(item);
+      });
+    });
+
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const card = btn.closest('.rule-card');
+        const text = card.getAttribute('data-copy') || card.innerText;
+        try {
+          await navigator.clipboard.writeText(text);
+          showToast('📋 Пункт скопирован для чата');
+        } catch {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+          showToast('📋 Пункт скопирован');
+        }
+      });
+    });
+
+    const searchInput = document.getElementById('searchInput');
+    const clearSearch = document.getElementById('clearSearch');
+    const focusSearchBtn = document.getElementById('focusSearchBtn');
+    const chips = document.querySelectorAll('.chip');
+    const sections = document.querySelectorAll('.section-block');
+    const emptyState = document.getElementById('emptyState');
+
+    let activeFilter = 'all';
+
+    focusSearchBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => searchInput.focus(), 250);
+    });
+
+    function applyFilters() {
+      const q = searchInput.value.trim().toLowerCase();
+      clearSearch.classList.toggle('visible', q.length > 0);
+      let totalVisible = 0;
+
+      sections.forEach(sec => {
+        const secType = sec.getAttribute('data-section');
+        const filterMatches = activeFilter === 'all' || activeFilter === secType;
+
+        if (!filterMatches) {
+          sec.classList.add('hidden');
+          return;
+        }
+
+        const items = sec.querySelectorAll('.rule-card, .acc-item');
+        let secVisible = 0;
+
+        items.forEach(el => {
+          const text = el.innerText.toLowerCase();
+          const show = !q || text.includes(q);
+          el.classList.toggle('hidden', !show);
+          if (show) {
+            secVisible++;
+            totalVisible++;
+            if (q && el.classList.contains('acc-item')) {
+              el.classList.add('open');
+              syncAccordion(el);
+            }
+          }
+        });
+
+        sec.classList.toggle('hidden', secVisible === 0);
+      });
+
+      emptyState.classList.toggle('visible', totalVisible === 0);
+    }
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeFilter = chip.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+
+    searchInput.addEventListener('input', applyFilters);
+    clearSearch.addEventListener('click', () => {
+      searchInput.value = '';
+      applyFilters();
+      searchInput.focus();
+    });
+  </script>
+</body>
+</html>
